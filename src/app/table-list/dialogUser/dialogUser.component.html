@@ -1,0 +1,208 @@
+
+<style>
+
+  /* CSS */
+  .button-4 {
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+  }
+
+  .button-4:hover {
+    background-color: #F3F4F6;
+    text-decoration: none;
+    transition-duration: 0.1s;
+  }
+
+  .button-4:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+
+  .button-4:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+
+  .button-4:focus {
+    outline: 1px transparent;
+  }
+
+  .button-4:before {
+    display: none;
+  }
+
+  .button-4:-webkit-details-marker {
+    display: none;
+  }
+  </style>
+
+
+  <div class="main-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div  >
+          <div class="card-header">
+            <h1 class="card-title">{{title}}</h1>
+          </div>
+          <div class="card-body"  *ngIf="render">
+
+            <form [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+
+
+              <div class="row" *ngIf="data">
+                <div class="col-md-12 pr-1">
+                  <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" class="form-control" placeholder="IdUsuario" formControlName="idusuario" disabled>
+                    <div *ngIf="UserForm.get('idusuario')?.invalid && submitted || UserForm.get('idusuario')?.touched" >
+                      <div *ngIf="UserForm.get('idusuario')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('idusuario')?.errors?.['idusuario']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5 pr-1">
+                  <div class="form-group">
+                    <label>Nombre(s)</label>
+                    <input type="text" class="form-control" placeholder="Nombre(s)" formControlName="nombre">
+                    <div *ngIf="UserForm.get('nombre')?.invalid && submitted || UserForm.get('nombre')?.touched" >
+                      <div *ngIf="UserForm.get('nombre')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('nombre')?.errors?.['nombre']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Apellido paterno</label>
+                    <input type="text" class="form-control" placeholder="Apellido paterno" formControlName="apellidoPaterno">
+                    <div *ngIf="UserForm.get('apellidoPaterno')?.invalid && submitted || UserForm.get('apellidoPaterno')?.touched" >
+                      <div *ngIf="UserForm.get('apellidoPaterno')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('apellidoPaterno')?.errors?.['apellidoPaterno']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 pl-1">
+                  <div class="form-group">
+                    <label for="email">Apellido materno</label>
+                    <input name="email" type="text" class="form-control" placeholder="Apellido materno" formControlName="apellidoMaterno">
+                    <div *ngIf="UserForm.get('apellidoMaterno')?.invalid && submitted || UserForm.get('apellidoMaterno')?.touched" >
+                      <div *ngIf="UserForm.get('apellidoMaterno')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('apellidoMaterno')?.errors?.['apellidoMaterno']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="!data">
+                <div class="col-md-6 pr-1">
+                  <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="text" class="form-control" placeholder="Contraseña" formControlName="password">
+                    <div *ngIf="UserForm.get('password')?.invalid && submitted || UserForm.get('password')?.touched" >
+                      <div *ngIf="UserForm.get('password')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('password')?.errors?.['password']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 pl-1">
+                  <div class="form-group">
+                    <label>Tipo de usuario</label>
+                    <select class="form-control" formControlName="idrol">
+                      <option selected disabled value="">Selecciona el tipo de usuario</option>
+                      <option value="100">Vendedor</option>
+                      <option value="200">Almacen</option>
+                      <option value="300">Administrador</option>
+                    </select>
+                    <div *ngIf="UserForm.get('idrol')?.invalid && submitted || UserForm.get('idrol')?.touched" >
+                      <div *ngIf="UserForm.get('idrol')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('idrol')?.errors?.['idrol']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Correo electronico</label>
+                    <input type="email" class="form-control" placeholder="Correo electronico" formControlName="email">
+                    <div *ngIf="UserForm.get('email')?.invalid && submitted || UserForm.get('email')?.touched" >
+                      <div *ngIf="UserForm.get('email')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('email')?.errors?.['email']" style="color: red">Campo invalido</div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Fecha de nacimiento</label>
+                    <input type="date" class="form-control" placeholder="Fecha de nacimiento" formControlName="fechaNacimiento" min="1900-01-01" max="2018-12-31">
+                    <div *ngIf="UserForm.get('fechaNacimiento')?.invalid && submitted || UserForm.get('fechaNacimiento')?.touched" >
+                      <div *ngIf="UserForm.get('fechaNacimiento')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('fechaNacimiento')?.errors?.['fechaNacimiento']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Celular</label>
+                    <input type="number" class="form-control" placeholder="Celular" formControlName="celular">
+                    <div *ngIf="UserForm.get('celular')?.invalid && submitted || UserForm.get('celular')?.touched" >
+                      <div *ngIf="UserForm.get('celular')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="UserForm.get('celular')?.errors?.['celular']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-sm float-left" type="submit" style="background-color: darkorchid;" >
+                      Agregar
+                    </button>
+                  </div>
+                  <div class="form-group">
+                    <button  class="btn btn-primary btn-sm float-right" [mat-dialog-close] cdkFocusInitial>Cancelar</button>
+                  </div>
+                  
+
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

@@ -1,0 +1,195 @@
+
+<style>
+
+  /* CSS */
+  .button-4 {
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+  }
+
+  .button-4:hover {
+    background-color: #F3F4F6;
+    text-decoration: none;
+    transition-duration: 0.1s;
+  }
+
+  .button-4:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+
+  .button-4:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+
+  .button-4:focus {
+    outline: 1px transparent;
+  }
+
+  .button-4:before {
+    display: none;
+  }
+
+  .button-4:-webkit-details-marker {
+    display: none;
+  }
+  </style>
+
+  <div class="panel-header panel-header-sm">
+  </div>
+  <div class="main-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="border-radius: 10px; margin-top: 10px;" >
+          <div class="card-header">
+            <h1 class="card-title">COMPRAS
+              <button [routerLink]="['/productos']" type="button" class="btn btn-primary btn-sm float-right"
+              data-toggle="button" aria-pressed="false" autocomplete="off"
+              style="background-color: darkorchid;" >
+                Productos
+              </button></h1>
+
+          </div>
+          <div class="card-body">
+
+            <form [formGroup]="newCompraForm" (ngSubmit)="onSubmit()">
+
+              <div class="row">
+                <div class="col-md-5 pr-1">
+                  <div class="form-group">
+                    <label>ID Compra</label>
+                    <input type="text" class="form-control" placeholder="" formControlName="id_compra">
+                    <div *ngIf="newCompraForm.get('id_compra')?.invalid && submitted || newCompraForm.get('id_compra')?.touched" >
+                      <div *ngIf="newCompraForm.get('id_compra')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('id_compra')?.errors?.['id_compra']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>CFDI</label>
+                    <select class="form-control" formControlName="CFDI">
+                      <option selected disabled value="">Selecciona el tipo de compra</option>
+                      <option value="G01">G01</option>
+                      <option value="G03">G03</option>
+                    </select>
+                    <div *ngIf="newCompraForm.get('CFDI')?.invalid && submitted || newCompraForm.get('CFDI')?.touched" >
+                      <div *ngIf="newCompraForm.get('CFDI')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('CFDI')?.errors?.['CFDI']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 pl-1">
+                  <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" class="form-control" placeholder="Usuario" formControlName="id_usuario">
+                    <div *ngIf="newCompraForm.get('id_usuario')?.invalid && submitted || newCompraForm.get('id_usuario')?.touched" >
+                      <div *ngIf="newCompraForm.get('id_usuario')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('id_usuario')?.errors?.['id_usuario']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 pr-1">
+                  <div class="form-group">
+                    <label>Cantidad</label>
+                    <input type="number" class="form-control" placeholder="Cantidad" formControlName="total_productos">
+                    <div *ngIf="newCompraForm.get('total_productos')?.invalid && submitted || newCompraForm.get('total_productos')?.touched" >
+                      <div *ngIf="newCompraForm.get('total_productos')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('total_productos')?.errors?.['total_productos']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 pl-1">
+                  <div class="form-group">
+                    <label>Subtotal</label>
+                    <input type="number" class="form-control" placeholder="Subtotal" formControlName="subtotal_compra">
+                    <div *ngIf="newCompraForm.get('subtotal_compra')?.invalid && submitted || newCompraForm.get('subtotal_compra')?.touched" >
+                      <div *ngIf="newCompraForm.get('subtotal_compra')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('subtotal_compra')?.errors?.['subtotal_compra']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Total</label>
+                    <input type="number" class="form-control" placeholder="Total" formControlName="total_compra">
+                    <div *ngIf="newCompraForm.get('total_compra')?.invalid && submitted || newCompraForm.get('total_compra')?.touched" >
+                      <div *ngIf="newCompraForm.get('total_compra')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('total_compra')?.errors?.['total_compra']" style="color: red">Campo invalido</div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" class="form-control" placeholder="Fecha" formControlName="createdAt" min="1900-01-01" max="2018-12-31">
+                    <div *ngIf="newCompraForm.get('createdAt')?.invalid && submitted || newCompraForm.get('createdAt')?.touched" >
+                      <div *ngIf="newCompraForm.get('createdAt')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('createdAt')?.errors?.['createdAt']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Fecha actualizacion</label>
+                    <input type="date" class="form-control" placeholder="Fecha" formControlName="updatedAt">
+                    <div *ngIf="newCompraForm.get('updatedAt')?.invalid && submitted || newCompraForm.get('updatedAt')?.touched" >
+                      <div *ngIf="newCompraForm.get('updatedAt')?.errors?.['required']" style="color: red;">Campo requerido</div>
+                      <div *ngIf="newCompraForm.get('updatedAt')?.errors?.['updatedAt']" style="color: red">Campo invalido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-sm" style="background-color: darkorchid;" >
+                      Registrar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

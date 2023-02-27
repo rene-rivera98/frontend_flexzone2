@@ -1,0 +1,47 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" >
+  <div class="row">
+    <div class="col-md-12" >
+      <div class="card" style="border-radius: 10px; margin-top: 10px;" >
+        <div class="card-header">
+          <h1 class="card-title">LISTA DE PRODUCTOS
+            <button [routerLink]="['/']" type="button" class="btn btn-primary btn-sm float-right"
+                    data-toggle="button" aria-pressed="false" autocomplete="off"
+                    style="background-color: darkorchid;" >
+            Agregar
+          </button></h1>
+          <span id="selectedRows"></span>
+          <!-- --ag-font-size: 17px;
+    --ag-font-family: monospace; -->
+        </div>
+        <div class="card-body">
+            <ag-grid-angular
+                style="width: 100%; height:700px;
+                      --ag-font-size: 10px;
+                      --ag-header-background-color: darkorchid;
+                      --ag-header-foreground-color: rgb(255, 242, 0);
+                      --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
+                      --ag-background-color: rgb(255, 255, 255);
+                      --ag-foreground-color: rgb(35, 0, 37);
+                      --ag-header-height: 1000px;"
+
+                class="ag-theme-alpine"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs"
+                (gridReady)="onGridReady($event)"
+                [rowSelection]="rowSelection"
+                (selectionChanged)="onSelectionChanged($event)"
+                >
+
+            </ag-grid-angular>
+
+                <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons>
+                </mat-paginator> -->
+              <!--  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
